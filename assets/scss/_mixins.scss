@@ -22,7 +22,6 @@
   }
 }
 
-
 @mixin small-laptop {
   @media (max-width: #{$laptop}) {
     @content;
@@ -97,11 +96,11 @@
 }
 
 @mixin bg($url, $position: 50% 0, $repeat: no-repeat) {
-  background: url($imgBase+$url) $position $repeat;
+  background: url($imgBase + $url) $position $repeat;
 }
 
 @mixin bg-size($url, $size: 100%, $position: 50% 0, $repeat: no-repeat) {
-  background: url($imgBase+$url) $position $repeat;
+  background: url($imgBase + $url) $position $repeat;
   background-size: $size;
 }
 
@@ -160,7 +159,6 @@
     transform: translateX($val);
   }
 }
-
 
 @mixin authBlockTemplate {
   background: white;
