@@ -37,12 +37,12 @@ export default {
       {
         name: 'name',
         type: 'input',
-        message: '👋: Введи название страницы:',
+        message: '👻: Введи название страницы:',
       },
       {
         name: 'pageType',
         type: 'list',
-        message: '😼: Какого типа страница нужна?',
+        message: '🤖: Какого типа страница нужна?',
         choices: [
           {
             value: 'index',
@@ -69,7 +69,7 @@ export default {
         {
           name: 'rewrite',
           type: 'list',
-          message: '😺: Кажись, такая страница уже есть, переписать страницу?',
+          message: '👀: Такая страница уже есть, переписать страницу?',
           choices: [
             {
               value: 'nope',
@@ -88,14 +88,14 @@ export default {
             this.template(validName),
             (e) => {
               if (!e) {
-                console.log(`😼: Страница ${validName} успешно создан!`)
+                console.log(`🔥: Страница ${validName} успешно создан!`)
               } else {
-                console.log('😿: Oops! Что-то пошло не так', e)
+                console.log('👹: Oops! Что-то пошло не так', e)
               }
             }
           )
         } else {
-          console.log('😿: Oops! Что-то пошло не так', err)
+          console.log('👹: Oops! Что-то пошло не так', err)
         }
       })
     fs.readFile(`${dest}/${pageType}.vue`, 'utf-8', async (err, data) => {
@@ -105,7 +105,7 @@ export default {
           if (rewrite === 'yup') {
             createFile()
           } else {
-            console.log('😸: Оке')
+            console.log('💓: Ок')
             process.exit(1)
           }
         } else {

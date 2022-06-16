@@ -42,7 +42,7 @@ export default {
       {
         name: 'type',
         type: 'list',
-        message: '😼: Компонент какого типа нужен?',
+        message: '👻: Компонент какого типа нужен?',
         choices: [
           {
             value: 'atoms',
@@ -61,7 +61,7 @@ export default {
       {
         name: 'name',
         type: 'input',
-        message: '👋: Введи название компонента:',
+        message: '🤖: Введи название компонента:',
       },
     ]
     return inq.prompt(questions)
@@ -77,8 +77,7 @@ export default {
         {
           name: 'rewrite',
           type: 'list',
-          message:
-            '😺: Кажись, такой компонент уже есть, переписать компонент?',
+          message: '👀: Такой компонент уже есть, переписать компонент?',
           choices: [
             {
               value: 'nope',
@@ -97,14 +96,14 @@ export default {
             this.template(validName, type),
             (e) => {
               if (!e) {
-                console.log(`😼: Компонент ${validName} успешно создан!`)
+                console.log(`🔥: Компонент ${validName} успешно создан!`)
               } else {
-                console.log('😿: Oops! Что-то пошло не так', e)
+                console.log('👹: Oops! Что-то пошло не так', e)
               }
             }
           )
         } else {
-          console.log('😿: Oops! Что-то пошло не так', err)
+          console.log('👹: Oops! Что-то пошло не так', err)
         }
       })
     fs.readFile(`${dest}/index.vue`, 'utf-8', async (err, data) => {
@@ -114,7 +113,7 @@ export default {
           if (rewrite === 'yup') {
             createFile()
           } else {
-            console.log('😸: Оке')
+            console.log('💓: Ок')
             process.exit(1)
           }
         } else {

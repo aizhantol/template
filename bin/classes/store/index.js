@@ -36,7 +36,7 @@ export const getters = {}
       {
         name: 'name',
         type: 'input',
-        message: '👋: Введи название модуля сторы:',
+        message: '👻: Введи название модуля сторы:',
       },
     ]
     return inq.prompt(questions)
@@ -52,7 +52,7 @@ export const getters = {}
         {
           name: 'rewrite',
           type: 'list',
-          message: '😺: Кажись, такой модуль уже есть, переписать модуль?',
+          message: '👀: Такой модуль уже есть, переписать модуль?',
           choices: [
             {
               value: 'nope',
@@ -68,13 +68,13 @@ export const getters = {}
         if (!err) {
           fs.writeFile(`${dest}/index.ts`, this.template(validName), (e) => {
             if (!e) {
-              console.log(`😼: Модуль сторы ${validName} успешно создан!`)
+              console.log(`🔥: Модуль сторы ${validName} успешно создан!`)
             } else {
-              console.log('😿: Oops! Что-то пошло не так', e)
+              console.log('👹: Oops! Что-то пошло не так', e)
             }
           })
         } else {
-          console.log('😿: Oops! Что-то пошло не так', err)
+          console.log('👹: Oops! Что-то пошло не так', err)
         }
       })
     fs.readFile(`${dest}/${validName}/index.ts`, 'utf-8', async (err, data) => {
@@ -84,7 +84,7 @@ export const getters = {}
           if (rewrite === 'yup') {
             createFile()
           } else {
-            console.log('😸: Оке')
+            console.log('💓: Ок')
             process.exit(1)
           }
         } else {
