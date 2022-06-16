@@ -1,3 +1,5 @@
+import { resolve } from 'path'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -21,7 +23,22 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/axios.ts' },
+    { src: '~/plugins/services/index.ts' },
+    { src: '~/plugins/repositories/index.ts' },
+  ],
+  alias: {
+    // atoms: resolve(__dirname, 'components/atoms'),
+    // molecules: resolve(__dirname, 'components/molecules'),
+    // organisms: resolve(__dirname, 'components/organisms'),
+    // templates: resolve(__dirname, 'components/templates'),
+    // icons: resolve(__dirname, 'assets/icons'),
+    services: resolve(__dirname, './services'),
+    repositories: resolve(__dirname, './repositories'),
+    models: resolve(__dirname, './models'),
+    plugins: resolve(__dirname, './plugins'),
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -32,6 +49,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+
+    '@nuxt/typescript-build',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
