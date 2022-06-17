@@ -1,3 +1,4 @@
+import { IAuth } from './Auth.interface'
 import NetRepository from 'repositories/NetRepository'
 // import { NetRepository } from "repositories/NetRepository/index"
 import {
@@ -5,9 +6,8 @@ import {
   IUserChangePasswordData,
   IUserForgotPasswordData,
   IUserResetPasswordData,
-  JWTToken,
+  JWTToken
 } from 'models/user'
-import { IAuth } from './Auth.interface'
 
 export default class Auth extends NetRepository implements IAuth {
   endpoint = '/users'
@@ -18,16 +18,16 @@ export default class Auth extends NetRepository implements IAuth {
    * @type { IUserAuthData }
    * @return Promise<JWTToken>
    */
-  public async sendAuthorized(params: IUserAuthData): Promise<JWTToken> {
+  public async sendAuthorized (params: IUserAuthData): Promise<JWTToken> {
     const serializeData = this.serialize({
       stuff: {
         type: 'users',
-        ...params,
-      },
+        ...params
+      }
     })
     const response = await this.post({
       params: serializeData,
-      nestedUrl: '/login',
+      nestedUrl: '/login'
     })
 
     return this.deserialize<JWTToken>(response)
@@ -39,19 +39,19 @@ export default class Auth extends NetRepository implements IAuth {
    * @type { IUserForgotPasswordData }
    * @return Promise<Boolean>
    */
-  public async sendForgotPassword(
+  public async sendForgotPassword (
     params: IUserForgotPasswordData
-  ): Promise<Boolean> {
+  ): Promise<boolean> {
     const serializeData = await this.serialize({
       stuff: {
         type: 'users',
-        ...params,
-      },
+        ...params
+      }
     })
 
     await this.post({
       params: serializeData,
-      nestedUrl: '/forgot',
+      nestedUrl: '/forgot'
     })
 
     return Promise.resolve(true)
@@ -63,19 +63,19 @@ export default class Auth extends NetRepository implements IAuth {
    * @type { IUserResetPasswordData }
    * @return Promise<Boolean>
    */
-  public async sendResetPassword(
+  public async sendResetPassword (
     params: IUserResetPasswordData
-  ): Promise<Boolean> {
+  ): Promise<boolean> {
     const serializeData = await this.serialize({
       stuff: {
         type: 'users',
-        ...params,
-      },
+        ...params
+      }
     })
 
     await this.post({
       params: serializeData,
-      nestedUrl: '/forgot-password/reset',
+      nestedUrl: '/forgot-password/reset'
     })
 
     return Promise.resolve(true)
@@ -87,18 +87,18 @@ export default class Auth extends NetRepository implements IAuth {
    * @type { IUserChangePasswordData }
    * @return Promise<boolean>
    */
-  public async sendChangePassword(
+  public async sendChangePassword (
     params: IUserChangePasswordData
   ): Promise<boolean> {
     const serializeData = await this.serialize({
       stuff: {
         type: 'users',
-        ...params,
-      },
+        ...params
+      }
     })
     await this.patch({
       params: serializeData,
-      nestedUrl: '/profile/reset-password',
+      nestedUrl: '/profile/reset-password'
     })
 
     return Promise.resolve(true)

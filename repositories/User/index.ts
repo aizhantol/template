@@ -1,6 +1,6 @@
-import NetRepository from 'repositories/NetRepository'
 import { IUserChangeProfileData, IUserProfile } from '../../models/user'
 import { IUser } from './User.interface'
+import NetRepository from 'repositories/NetRepository'
 
 export default class User extends NetRepository implements IUser {
   endpoint = '/users'
@@ -9,9 +9,9 @@ export default class User extends NetRepository implements IUser {
    * Запрос на получения профиля
    * @return Promise<IUserProfile>
    */
-  public async getProfile(): Promise<IUserProfile> {
+  public async getProfile (): Promise<IUserProfile> {
     const response = await this.get({
-      nestedUrl: '/profile/show',
+      nestedUrl: '/profile/show'
     })
     return this.deserialize<IUserProfile>(response)
   }
@@ -21,18 +21,18 @@ export default class User extends NetRepository implements IUser {
    * @param params
    * @return Promise<boolean>
    */
-  public async sendChangeProfile(
+  public async sendChangeProfile (
     params: IUserChangeProfileData
   ): Promise<boolean> {
     const serializeData = await this.serialize({
       stuff: {
         type: 'users',
-        ...params,
-      },
+        ...params
+      }
     })
     await this.patch({
       params: serializeData,
-      nestedUrl: '/profile/update',
+      nestedUrl: '/profile/update'
     })
 
     return Promise.resolve(true)

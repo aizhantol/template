@@ -8,15 +8,15 @@ export default {
   head: {
     title: 'aizhanspussy',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -24,13 +24,13 @@ export default {
 
   // Global variables and mixins
   styleResources: {
-    scss: ['~/assets/scss/_mixins.scss', '~/assets/scss/_variables.scss'],
+    scss: ['~/assets/scss/_mixins.scss', '~/assets/scss/_variables.scss']
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/axios.ts' },
     { src: '~/plugins/services/index.ts' },
-    { src: '~/plugins/repositories/index.ts' },
+    { src: '~/plugins/repositories/index.ts' }
   ],
   alias: {
     // atoms: resolve(__dirname, 'components/atoms'),
@@ -39,9 +39,10 @@ export default {
     // templates: resolve(__dirname, 'components/templates'),
     // icons: resolve(__dirname, 'assets/icons'),
     services: resolve(__dirname, './services'),
+    directives: resolve(__dirname, './directives'),
     repositories: resolve(__dirname, './repositories'),
     models: resolve(__dirname, './models'),
-    plugins: resolve(__dirname, './plugins'),
+    plugins: resolve(__dirname, './plugins')
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,22 +55,22 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
 
-    '@nuxt/typescript-build',
+    '@nuxt/typescript-build'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: '/'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {}
 }

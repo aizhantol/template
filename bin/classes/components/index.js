@@ -17,7 +17,7 @@ class Components {
    * @param {string} name – name of a component
    * @returns {string} – a template of the component
    */
-  template(name, type) {
+  template (name, type) {
     return `<template></template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
    * @private
    * @returns {object} - returns answers of promt
    */
-  prompt() {
+  prompt () {
     const questions = [
       {
         name: 'type',
@@ -46,29 +46,29 @@ export default {
         message: '👻: Компонент какого типа нужен?',
         choices: [
           {
-            value: 'atoms',
+            value: 'atoms'
           },
           {
-            value: 'molecules',
+            value: 'molecules'
           },
           {
-            value: 'organisms',
+            value: 'organisms'
           },
           {
-            value: 'templates',
-          },
-        ],
+            value: 'templates'
+          }
+        ]
       },
       {
         name: 'name',
         type: 'input',
-        message: '🤖: Введи название компонента:',
-      },
+        message: '🤖: Введи название компонента:'
+      }
     ]
     return inq.prompt(questions)
   }
 
-  async createComponent(ctx) {
+  async createComponent (ctx) {
     this.context = ctx
     const { type, name } = await this.prompt()
     const validName = name.replace('-', '_')
@@ -81,13 +81,13 @@ export default {
           message: '👀: Такой компонент уже есть, переписать компонент?',
           choices: [
             {
-              value: 'nope',
+              value: 'nope'
             },
             {
-              value: 'yup',
-            },
-          ],
-        },
+              value: 'yup'
+            }
+          ]
+        }
       ])
     const createFile = () =>
       fs.mkdir(dest, { recursive: true }, (err) => {

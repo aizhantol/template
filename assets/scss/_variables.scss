@@ -4,13 +4,15 @@ $browser-context: 16;
 $f-text: 'Gilroy';
 
 // colors
-$c-main: #3d639d;
+$c-main: #0084F4;
+$c-base: #03B760;
 $c-primary: #00c48c;
 $c-success: #01bf89;
 $c-text: #262728;
 $c-yellow: #fecb4d;
 $c-background: #f3f5f8;
-$c-grey: #bbc2d0;
+$c-grey: #E4E4E4;
+$c-grey2: #999999;
 $c-pink: #ff647c;
 $c-white: #fff;
 $c-error: #ec3920;
@@ -22,10 +24,10 @@ $btn-shadow: 0px 10px 30px rgba(0, 196, 140, 0.15);
 $text-shadow: inset 0px 0.5px 4px rgba(0, 196, 140, 0.62);
 
 // transitions
-$transition-primary: 0.3s;
-$transition-secondary: 0.2s;
+$t-primary: 0.3s;
+$t-secondary: 0.2s;
 
-$imgBase: '../images/';
+$imgBase: '@/assets/';
 
 $small: 560px;
 $middle: 760px;

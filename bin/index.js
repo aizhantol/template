@@ -10,8 +10,8 @@ const pages = new Pages()
 const store = new Store()
 
 const commands = new Map()
-commands.set('component', (ctx) => component.createComponent(ctx))
-commands.set('page', (ctx) => pages.createPage(ctx))
-commands.set('store', (ctx) => store.createModule(ctx))
+commands.set('component', ctx => component.createComponent(ctx))
+commands.set('page', ctx => pages.createPage(ctx))
+commands.set('store', ctx => store.createModule(ctx))
 
 module.exports = commands
