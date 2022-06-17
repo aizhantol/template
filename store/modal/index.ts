@@ -1,22 +1,23 @@
 import { MutationTree } from 'vuex'
+import { IModal } from 'models/modal'
 
 export const state = () => ({
-  isOpen: false,
-  title: '',
-  payload: ''
+  modals: [] as IModal[],
 })
 
 export type ModalStateT = ReturnType<typeof state>
 
 export const mutations: MutationTree<ModalStateT> = {
-  show(state, data:any) {
-    state.title = data.title
-    state.isOpen = true
-    state.payload = data.payload
+  add(state, data: IModal) {
+    data.id = 1
+    state.modals = [data]
+  },
+  push(state, data: IModal) {
+    data.id = state.modals.length + 1
+    state.modals.push(data)
   },
   close(state) {
-    state.isOpen = false
-    state.title = ''
+    state.modals.pop()
   },
 }
 

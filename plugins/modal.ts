@@ -1,15 +1,17 @@
 import { Plugin, Context } from '@nuxt/types'
+import { IModal } from 'models/modal'
 
 const plugin: Plugin = (ctx: Context, inject) => {
   const modal = {
-    show (type: string, payload?: object) {
-      ctx.store.commit('modal/show', { title: type, data: payload })
-      document.documentElement.style.overflow = 'hidden'
+    add(data: IModal) {
+      ctx.store.commit('modal/add', data)
     },
-    close () {
+    push(data: IModal) {
+      ctx.store.commit('modal/push', data)
+    },
+    close() {
       ctx.store.commit('modal/close')
-      document.documentElement.style.overflow = ''
-    }
+    },
   }
   inject('modal', modal)
 }

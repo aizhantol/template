@@ -29,6 +29,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/axios.ts' },
+    { src: '~/plugins/modal.ts' },
     { src: '~/plugins/services/index.ts' },
     { src: '~/plugins/repositories/index.ts' },
   ],

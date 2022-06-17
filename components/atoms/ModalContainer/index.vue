@@ -1,12 +1,12 @@
 <template>
   <div class="modal-wrapper">
     <div class="modal-container">
-      <div class="modal-close" @click="close"></div>
+      <div class="modal-close" @click="close" />
       <!-- @slot контент -->
       <slot />
     </div>
 
-    <div class="modal-mask" @click="close"></div>
+    <div class="modal-mask" @click="close" />
   </div>
 </template>
 
