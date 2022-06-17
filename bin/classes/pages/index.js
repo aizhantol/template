@@ -13,7 +13,7 @@ class Pages {
    * @param {string} name – name of a component
    * @returns {string} – a template of the component
    */
-  template (name) {
+  template(name) {
     return `<template></template>
 
 <script>
@@ -34,12 +34,12 @@ export default {
    * @private
    * @returns {object} - returns answers of promt
    */
-  prompt () {
+  prompt() {
     const questions = [
       {
         name: 'name',
         type: 'input',
-        message: '👻: Введи название страницы:'
+        message: '👻: Введи название страницы:',
       },
       {
         name: 'pageType',
@@ -47,21 +47,21 @@ export default {
         message: '🤖: Какого типа страница нужна?',
         choices: [
           {
-            value: 'index'
+            value: 'index',
           },
           {
-            value: '_slug'
+            value: '_slug',
           },
           {
-            value: '_id'
-          }
-        ]
-      }
+            value: '_id',
+          },
+        ],
+      },
     ]
     return inq.prompt(questions)
   }
 
-  async createPage (ctx) {
+  async createPage(ctx) {
     this.context = ctx
     const { name, pageType } = await this.prompt()
     const validName = name.replace('-', '_')
@@ -74,13 +74,13 @@ export default {
           message: '👀: Такая страница уже есть, переписать страницу?',
           choices: [
             {
-              value: 'nope'
+              value: 'nope',
             },
             {
-              value: 'yup'
-            }
-          ]
-        }
+              value: 'yup',
+            },
+          ],
+        },
       ])
     const createFile = () =>
       fs.mkdir(dest, { recursive: true }, (err) => {

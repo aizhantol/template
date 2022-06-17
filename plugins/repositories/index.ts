@@ -35,7 +35,7 @@ const plugin: Plugin = (ctx: Context, inject) => {
   const repositories = {
     auth: new Auth(ctx.$axios, ctx.$services.deserialize),
     register: new Register(ctx.$axios, ctx.$services.deserialize),
-    user: new User(ctx.$axios, ctx.$services.deserialize)
+    user: new User(ctx.$axios, ctx.$services.deserialize),
   }
   $repositoriesAccessor = repositories
 

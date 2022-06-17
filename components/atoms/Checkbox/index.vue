@@ -7,7 +7,7 @@
       type="checkbox"
       class="checkbox__field"
     />
-    <span class="checkbox__indicator"></span>
+    <span class="checkbox__indicator" />
     <span>
       <!-- @slot slot for checkbox label -->
       <slot />

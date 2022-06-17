@@ -3,7 +3,7 @@ import {
   JWTToken,
   IUserForgotPasswordData,
   IUserResetPasswordData,
-  IUserChangePasswordData
+  IUserChangePasswordData,
 } from 'models/user'
 
 export interface IAuth {
