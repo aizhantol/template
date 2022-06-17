@@ -1,10 +1,8 @@
 <template>
   <div>
     <div class="container" />
-    <AtomsButton>
-      nnn
-    </AtomsButton>
-    <AtomsButton type="secondary">nnn</AtomsButton>
+    <AtomsButton> nnn </AtomsButton>
+    <AtomsButton type="secondary" @click="show">nnn</AtomsButton>
     <AtomsButton type="small">nnn</AtomsButton>
     <AtomsButton type="small-outline">nnn</AtomsButton>
     <AtomsButton type="outline">nnn</AtomsButton>
@@ -20,10 +18,13 @@
 
 <script>
 export default {
-  name: 'IndexPage',
+  methods: {
+    show() {
+      this.$modal.add({ title: 'Main' })
+    },
+  },
 }
 </script>
-
 <style scoped>
 .container {
   background: red;

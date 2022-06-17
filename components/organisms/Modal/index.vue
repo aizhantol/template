@@ -1,17 +1,19 @@
 <template>
-  <AtomsModalContainer v-if="isOpen">
-    <component :is="`MoleculesModal${title}`" />
+  <AtomsModalContainer v-if="modals.length">
+    <component
+      :is="`MoleculesModal${item.title}`"
+      v-for="item in modals"
+      v-show="item.id === modals.length"
+      :key="item.id"
+    />
   </AtomsModalContainer>
 </template>
 
 <script>
 export default {
   computed: {
-    isOpen() {
-      return this.$store.state.modal.isOpen
-    },
-    title() {
-      return this.$store.state.modal.title
+    modals() {
+      return this.$store.state.modal.modals
     },
   },
 }
