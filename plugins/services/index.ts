@@ -27,7 +27,7 @@ declare module 'vuex/types/index' {
 const plugin: Plugin = (ctx: Context, inject) => {
   const services = {
     errors: new ErrorHandler(ctx.error, ctx.store),
-    deserialize: new Deserialize(),
+    deserialize: new Deserialize()
   }
   $servicesAccessor = services
 

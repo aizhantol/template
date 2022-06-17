@@ -1,6 +1,6 @@
 import { Context } from '@nuxt/types'
-import { ErrorMessagesT, IResponseError } from 'models/responseError'
 import { IErrorHandler } from './ErrorHandler.interface'
+import { ErrorMessagesT, IResponseError } from 'models/responseError'
 
 class ErrorHandlerService implements IErrorHandler {
   private readonly message: ErrorMessagesT = {
@@ -13,11 +13,11 @@ class ErrorHandlerService implements IErrorHandler {
     500: 'Увы, у нас возникла техническая неполадка. Пожалуйста, попробуйте позже.',
     501: 'Данное действие не может выполнится.',
     502: 'Время ожидания истекло. Попробуйте повторить действие.',
-    503: 'В данный момент сервис не доступен для работы. Извиняемся, за предоставленные неудобства.',
+    503: 'В данный момент сервис не доступен для работы. Извиняемся, за предоставленные неудобства.'
   }
 
   // eslint-disable-next-line no-useless-constructor
-  constructor(
+  constructor (
     private $error: Context['error'],
     private $store: Context['store']
   ) {}
@@ -27,11 +27,11 @@ class ErrorHandlerService implements IErrorHandler {
    * @param code
    * @type number | string
    */
-  public onError(code: number | string) {
+  public onError (code: number | string) {
     if (this.message[code]) {
       this.$error({
         statusCode: Number(code),
-        message: this.message[code],
+        message: this.message[code]
       })
     }
   }
@@ -41,12 +41,12 @@ class ErrorHandlerService implements IErrorHandler {
    * @param data
    * @type { IResponseError }
    */
-  public addNotifications(data: IResponseError) {
+  public addNotifications (data: IResponseError) {
     data.errors.forEach((error) => {
       this.$store.commit('notifications/addNotification', {
         title: error.title,
         description: error.detail,
-        type: 'error',
+        type: 'error'
       })
     })
   }

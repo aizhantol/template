@@ -13,7 +13,7 @@ class Store {
    * @param {string} name – name of a component
    * @returns {string} – a template of the component
    */
-  template(name) {
+  template (name) {
     return `
 /**
  * @module 'STORE/${name}'
@@ -33,18 +33,18 @@ export const getters = {}
    * @private
    * @returns {object} - returns answers of promt
    */
-  prompt() {
+  prompt () {
     const questions = [
       {
         name: 'name',
         type: 'input',
-        message: '👻: Введи название модуля сторы:',
-      },
+        message: '👻: Введи название модуля сторы:'
+      }
     ]
     return inq.prompt(questions)
   }
 
-  async createModule(ctx) {
+  async createModule (ctx) {
     this.context = ctx
     const { name } = await this.prompt()
     const validName = name.replace('-', '_')
@@ -57,13 +57,13 @@ export const getters = {}
           message: '👀: Такой модуль уже есть, переписать модуль?',
           choices: [
             {
-              value: 'nope',
+              value: 'nope'
             },
             {
-              value: 'yup',
-            },
-          ],
-        },
+              value: 'yup'
+            }
+          ]
+        }
       ])
     const createFile = () =>
       fs.mkdir(dest, { recursive: true }, (err) => {

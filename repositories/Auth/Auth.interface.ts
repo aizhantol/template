@@ -3,12 +3,12 @@ import {
   JWTToken,
   IUserForgotPasswordData,
   IUserResetPasswordData,
-  IUserChangePasswordData,
+  IUserChangePasswordData
 } from 'models/user'
 
 export interface IAuth {
   sendAuthorized(params: IUserAuthData): Promise<JWTToken>
-  sendForgotPassword(params: IUserForgotPasswordData): Promise<Boolean>
-  sendResetPassword(params: IUserResetPasswordData): Promise<Boolean>
-  sendChangePassword(params: IUserChangePasswordData): Promise<Boolean>
+  sendForgotPassword(params: IUserForgotPasswordData): Promise<boolean>
+  sendResetPassword(params: IUserResetPasswordData): Promise<boolean>
+  sendChangePassword(params: IUserChangePasswordData): Promise<boolean>
 }
