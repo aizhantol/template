@@ -11,17 +11,17 @@ export default class Register extends NetRepository implements IRegister {
    * @type { IUserRegisterData }
    * @return Promise<JWTToken>
    */
-  public async sendRegistered (params: IUserRegisterData): Promise<JWTToken> {
+  public async sendRegistered(params: IUserRegisterData): Promise<JWTToken> {
     const serializeData = await this.serialize({
       stuff: {
         type: 'users',
-        ...params
-      }
+        ...params,
+      },
     })
 
     const response = await this.post({
       params: serializeData,
-      nestedUrl: '/register'
+      nestedUrl: '/register',
     })
 
     return this.deserialize<JWTToken>(response)
@@ -33,9 +33,9 @@ export default class Register extends NetRepository implements IRegister {
    * @type { JWTToken }
    * @return Promise<boolean>
    */
-  public async sendActivateEmail (params: JWTToken): Promise<boolean> {
+  public async sendActivateEmail(params: JWTToken): Promise<boolean> {
     await this.get({
-      nestedUrl: `/email/verify/${params.token}`
+      nestedUrl: `/email/verify/${params.token}`,
     })
     return Promise.resolve(true)
   }

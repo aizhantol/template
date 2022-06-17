@@ -5,7 +5,7 @@ import Deserialize from 'services/Deserialize'
 class BaseRepository implements INetRepository {
   protected endpoint = ''
 
-  constructor (
+  constructor(
     private $http: Context['$axios'],
     private deserializer: Deserialize
   ) {}
@@ -16,10 +16,10 @@ class BaseRepository implements INetRepository {
    * @type { INetMethodParams<P> }
    * @return any
    */
-  protected async get<P> (params?: INetMethodParams<P>) {
+  protected async get<P>(params?: INetMethodParams<P>) {
     try {
       return await this.$http.$get(this.endpoint + params?.nestedUrl, {
-        params: params?.params
+        params: params?.params,
       })
     } catch (e) {
       console.log('🐞 ~ file: index.ts ~ line 20 ~ BaseRepository ~ get ~ e', e)
@@ -33,7 +33,7 @@ class BaseRepository implements INetRepository {
    * @type { INetMethodParams<P> }
    * @return any
    */
-  protected async post<P> (params?: INetMethodParams<P>) {
+  protected async post<P>(params?: INetMethodParams<P>) {
     try {
       return await this.$http.$post(
         this.endpoint + params?.nestedUrl,
@@ -51,7 +51,7 @@ class BaseRepository implements INetRepository {
    * @type { INetMethodParams<P> }
    * @return any
    */
-  protected async put<P> (params: INetMethodParams<P>) {
+  protected async put<P>(params: INetMethodParams<P>) {
     try {
       return await this.$http.$put(
         this.endpoint + params?.nestedUrl,
@@ -69,7 +69,7 @@ class BaseRepository implements INetRepository {
    * @type { INetMethodParams<P> }
    * @return any
    */
-  protected async patch<P> (params: INetMethodParams<P>) {
+  protected async patch<P>(params: INetMethodParams<P>) {
     try {
       return await this.$http.$patch(
         this.endpoint + params?.nestedUrl,
@@ -87,10 +87,10 @@ class BaseRepository implements INetRepository {
    * @type { INetMethodParams<P> }
    * @return any
    */
-  protected async delete<P> (params: INetMethodParams<P>) {
+  protected async delete<P>(params: INetMethodParams<P>) {
     try {
       return await this.$http.$get(this.endpoint + params?.nestedUrl, {
-        data: params?.params
+        data: params?.params,
       })
     } catch (e) {
       console.log('🐞 ~ file: index.ts ~ line 16 ~ BaseRepository ~ get ~ e', e)
@@ -104,7 +104,7 @@ class BaseRepository implements INetRepository {
    * @param data
    * @return <R>
    */
-  public deserialize<R> (data: any): R {
+  public deserialize<R>(data: any): R {
     return this.deserializer.deserialize(data)
   }
 
@@ -114,7 +114,7 @@ class BaseRepository implements INetRepository {
    * @param data
    * @return <R>
    */
-  public serialize<R> (data: any): R {
+  public serialize<R>(data: any): R {
     return this.deserializer.serialize(data)
   }
 }

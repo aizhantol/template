@@ -5,7 +5,7 @@
   >
     <div class="lazy-image__sceleton" />
     <client-only>
-      <img :data-url="url" :alt="alt" src="">
+      <img :data-url="url" :alt="alt" src="" />
     </client-only>
     <figcaption v-if="caption" class="lazy-image__caption">
       {{ caption }}
@@ -19,7 +19,7 @@ import LazyLoadImage from 'directives/LazyLoadImage'
 export default {
   name: 'LazyImage',
   directives: {
-    lazyload: LazyLoadImage
+    lazyload: LazyLoadImage,
   },
   props: {
     /**
@@ -27,21 +27,21 @@ export default {
      */
     url: {
       type: String,
-      default: ''
+      default: '',
     },
     /**
      * Alternative text of the image
      */
     alt: {
       type: String,
-      default: ''
+      default: '',
     },
     /**
      * Caption of the image
      */
     caption: {
       type: String,
-      default: ''
+      default: '',
     },
     /**
      * Variant of the image by size
@@ -49,9 +49,9 @@ export default {
      */
     variant: {
       type: String,
-      default: 'default'
-    }
-  }
+      default: 'default',
+    },
+  },
 }
 </script>
 
