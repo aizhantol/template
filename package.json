@@ -2,6 +2,18 @@
   "name": "aizhanspussy",
   "version": "1.0.0",
   "private": true,
+  "contributors": [
+    {
+      "name": "Aizhan Tolebayeva",
+      "email": "hasnochil@gmail.com",
+      "url": "https://github.com/aizhantol"
+    },
+    {
+      "name": "Alizhan Abdul Khalil",
+      "email": "alizhan.abdulkhalil@gmail.com",
+      "url": "https://github.com/aleezhan"
+    }
+  ],
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
