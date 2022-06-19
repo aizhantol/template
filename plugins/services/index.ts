@@ -33,7 +33,7 @@ const plugin: Plugin = (ctx: Context, inject) => {
     errors: new ErrorHandler(ctx.error, ctx.store),
     deserialize: new Deserialize(),
     validate: new Validate(),
-    mask: new Mask()
+    mask: new Mask(),
   }
   $servicesAccessor = services
 

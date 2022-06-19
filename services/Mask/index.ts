@@ -1,14 +1,16 @@
-const tokens:any = {
+const tokens: any = {
   '#': {
-    pattern: /\d/
-  }
+    pattern: /\d/,
+  },
 }
 
 class Mask {
   constructor() {}
 
   private replaceAt(str: string, index: number, replacement: string): string {
-    return str.substring(0, index) + replacement + str.substring(index + str.length)
+    return (
+      str.substring(0, index) + replacement + str.substring(index + str.length)
+    )
   }
 
   private masking(mask: string, value: string): any {
@@ -16,7 +18,10 @@ class Mask {
     mask.split('').forEach((maskChar: string, index: number) => {
       if (Object.keys(tokens).includes(maskChar)) {
         while (position < value.length) {
-          if (tokens[maskChar].pattern.test(value[position]) && value[position] !== mask[position]) {
+          if (
+            tokens[maskChar].pattern.test(value[position]) &&
+            value[position] !== mask[position]
+          ) {
             result += value[position]
             position++
             has = index

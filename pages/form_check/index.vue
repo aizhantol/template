@@ -1,10 +1,20 @@
 <template>
   <MoleculesForm :onSubmit="submit">
-    <AtomsInput v-model="name" name="Имя" rules="required|max:3" :mask="'+7 (###) ###-##-##'" />
+    <AtomsInput
+      v-model="name"
+      name="Имя"
+      rules="required|max:3"
+      :mask="'+7 (###) ###-##-##'"
+    />
     <AtomsInput v-model="surname" name="Фамилия" rules="required|min:3" />
     <AtomsInput v-model="email" name="Почта" rules="required|email" />
     <MoleculesSelect :model="city" :options="list" required @change="onList" />
-    <AtomsInput v-model="description" textarea name="Описание" rules="required|max:200|alpha" />
+    <AtomsInput
+      v-model="description"
+      textarea
+      name="Описание"
+      rules="required|max:200|alpha"
+    />
     <AtomsButton type="submit">submit</AtomsButton>
   </MoleculesForm>
 </template>
@@ -95,7 +105,7 @@ export default {
         id: 17,
         name: 'Красноярск',
       },
-    ]
+    ],
   }),
   methods: {
     submit() {
@@ -105,7 +115,7 @@ export default {
       console.log(e)
       this.city = e
       console.log(this.city)
-    }
+    },
   },
 }
 </script>

@@ -8,7 +8,7 @@
       'is-disabled': disabled,
       'is-required': isRequired,
       'has-hint': hint,
-      'textarea': textarea,
+      textarea: textarea,
       'show-error': showError,
     }"
     :for="name"
@@ -32,7 +32,7 @@
       @focus="onFocus"
       @blur="onBlur"
       @click="$emit('click')"
-    >
+    />
     <textarea
       v-else
       :id="id"
@@ -50,18 +50,22 @@
 
     <!-- Clear icon for clearable input -->
     <span v-if="clearable" class="clear" @click="clear">
-      <img src="~icons/delete.svg" alt="delete icon">
+      <img src="~icons/delete.svg" alt="delete icon" />
     </span>
 
     <!-- Eye icon for password show toggle -->
-    <span v-if="type === 'password' && !clearable" class="password" @click="togglePasswordType">
-      <img :src="`~icons/${passordType}-password.svg`">
+    <span
+      v-if="type === 'password' && !clearable"
+      class="password"
+      @click="togglePasswordType"
+    >
+      <img :src="`~icons/${passordType}-password.svg`" />
     </span>
 
     <!-- Error text show under input -->
     <template v-if="error.length">
       <span v-for="(err, index) in error" :key="index" class="errors">
-        <img src="~icons/error_input.svg" alt="error icon">
+        <img src="~icons/error_input.svg" alt="error icon" />
         <span class="errors_text">
           {{ err.message }}
         </span>
@@ -141,7 +145,7 @@ export default {
      */
     id: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      * Условие(отключенный) для отключения поля
@@ -149,7 +153,7 @@ export default {
      */
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      * Условие(очищаемый) для удаления значения поля
@@ -157,7 +161,7 @@ export default {
      */
     clearable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      * Условие(textarea) для textarea
@@ -165,7 +169,7 @@ export default {
      */
     textarea: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      * Правлиа для поля
@@ -175,7 +179,7 @@ export default {
      */
     rules: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      * Маска для поля
@@ -195,8 +199,8 @@ export default {
      */
     mask: {
       type: [String, Array, Object],
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
@@ -205,7 +209,7 @@ export default {
       passordType: 'hide',
       isFocus: false,
       formatRules: null,
-      selection: null
+      selection: null,
     }
   },
   computed: {
@@ -233,7 +237,11 @@ export default {
          */
         this.$emit('input', this.mask ? this.maskValue(value) : value)
         if (this.selection) {
-          setTimeout(() => this.$refs.field.querySelector(['input', 'textarea']).setSelectionRange(this.selection, this.selection))
+          setTimeout(() =>
+            this.$refs.field
+              .querySelector(['input', 'textarea'])
+              .setSelectionRange(this.selection, this.selection)
+          )
         }
       },
     },
@@ -246,11 +254,14 @@ export default {
     }
 
     if (this.rules) {
-      this.formatRules = this.rules.split('|').map(rule => {
+      this.formatRules = this.rules.split('|').map((rule) => {
         const [key, value] = rule.split(':')
         return rule.includes(':') ? { name: key, value } : { name: key, key }
       })
-      this.error = this.$services.validate.validate(this.formatRules, this.value)
+      this.error = this.$services.validate.validate(
+        this.formatRules,
+        this.value
+      )
     }
   },
   methods: {
@@ -261,12 +272,17 @@ export default {
       this.passordType = this.passordType === 'open' ? 'hide' : 'open'
     },
     validateCheck(e) {
-      this.error = this.$services.validate.validate(this.formatRules, e.target.value)
+      this.error = this.$services.validate.validate(
+        this.formatRules,
+        e.target.value
+      )
       this.showError = true
     },
     onKey(e) {
       if (e.key === 'Backspace') {
-        this.selection = this.$refs.field.querySelector(['input', 'textarea']).selectionStart - 1
+        this.selection =
+          this.$refs.field.querySelector(['input', 'textarea']).selectionStart -
+          1
       } else {
         this.selection = null
       }
@@ -274,7 +290,7 @@ export default {
     maskValue(value) {
       return this.$services.mask.mask(this.mask, value)
     },
-    onFocus () {
+    onFocus() {
       this.$emit('focus')
       this.isFocus = true
     },
@@ -311,7 +327,7 @@ export default {
   }
 
   .hint {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   input {
@@ -323,7 +339,7 @@ export default {
     transition: 1.2s ease-in-out;
 
     &:hover {
-      border: 1px solid  darkblue;
+      border: 1px solid darkblue;
     }
 
     &:focus {
@@ -337,7 +353,7 @@ export default {
     }
 
     .placeholder {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
@@ -357,9 +373,10 @@ export default {
   }
 
   &.has-error.show-error {
-    input, textarea {
-      background: #FFF5F5;
-      border: 1px solid #FFD8D8;
+    input,
+    textarea {
+      background: #fff5f5;
+      border: 1px solid #ffd8d8;
     }
 
     .errors {

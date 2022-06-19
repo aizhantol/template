@@ -14,19 +14,19 @@ export default {
   props: {
     onSubmit: {
       type: Function,
-      required: true
+      required: true,
     },
     data: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     errorScroll: {
       type: Boolean,
-      default: true
+      default: true,
     },
     errorShow: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   data: () => ({
@@ -49,13 +49,16 @@ export default {
         this.onSubmit()
       } else {
         try {
-          await this.$axios[this.data.method](this.data.url, this.data.data).then(response => {
+          await this.$axios[this.data.method](
+            this.data.url,
+            this.data.data
+          ).then((response) => {
             this.onSubmit(response.data)
           })
         } catch (e) {
           const error = e.response?.data?.errors
           if (error) {
-            Object.values(error).forEach(value => this.error.push(value))
+            Object.values(error).forEach((value) => this.error.push(value))
           } else {
             this.error = [e.response?.data?.message]
           }
@@ -65,12 +68,15 @@ export default {
     validate() {
       const fields = this.$refs.form.querySelectorAll('.validate-me')
       this.error = []
-      fields.forEach(field => {
+      fields.forEach((field) => {
         if (field.classList.contains('has-error')) {
-          this.error.push({ el: field, message: 'Проверьте правильность заполнения поля' })
+          this.error.push({
+            el: field,
+            message: 'Проверьте правильность заполнения поля',
+          })
         }
       })
-    }
+    },
   },
 }
 </script>
