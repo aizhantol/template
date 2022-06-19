@@ -1,8 +1,8 @@
 <template>
   <div
     ref="select"
-    class="select"
-    :class="[{ selected: !!selected.id }, color]"
+    class="select validate-me"
+    :class="[{ selected: !!selected.id, 'is-required': required, 'show-error': showError, 'has-error' : hasError}, color]"
     :style="{ width: width, height: height }"
   >
     <span v-if="label" class="label">
@@ -85,10 +85,15 @@ export default {
       type: String,
       default: 'Select me',
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       isOpen: false,
+      showError: false
     }
   },
   computed: {
@@ -98,6 +103,10 @@ export default {
         name: this.model ? this.getOptionName() : this.placeholder,
       }
     },
+    hasError() {
+      console.log(this.selected)
+      return !this.selected.id && this.required
+    }
   },
   mounted() {
     document.addEventListener('click', (e) => {
@@ -132,6 +141,7 @@ export default {
       ) {
         this.isOpen = false
       }
+      this.showError = true
     },
     /**
      * Method to select option
@@ -148,6 +158,10 @@ export default {
 .select {
   width: 100%;
   position: relative;
+
+  &.has-error.show-error {
+    background: red;
+  }
 
   .label {
     font-size: 16px;
