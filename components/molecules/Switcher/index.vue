@@ -25,9 +25,6 @@ export default {
     event: 'change',
   },
   props: {
-    /**
-     * значение input
-     */
     names: {
       type: Array,
       default: () => [],
