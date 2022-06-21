@@ -1,5 +1,9 @@
 <template>
-  <label :for="id" class="checkbox validate-me" :class="{'has-error': required && !value}">
+  <label
+    :for="id"
+    class="checkbox validate-me"
+    :class="{ 'has-error': required && !value }"
+  >
     <input
       :id="id"
       v-model="model"

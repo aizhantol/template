@@ -7,7 +7,13 @@
       placeholder="name"
       :mask="'+2 (###) ###-SX-?Aa---#SS$$$aaAAA'"
     />
-    <AtomsInput v-model="surname" name="Фамилия" rules="required|min:3" clearable placeholder="surname" />
+    <AtomsInput
+      v-model="surname"
+      name="Фамилия"
+      rules="required|min:3"
+      clearable
+      placeholder="surname"
+    />
     <AtomsInput
       v-model="email"
       name="Почта"
@@ -25,7 +31,13 @@
       rules="required|password"
       clearable
     />
-    <AtomsInput v-model="passwordRepeat" type="password" name="Повторите пароль" rules="required|password" :confirmed="password" />
+    <AtomsInput
+      v-model="passwordRepeat"
+      type="password"
+      name="Повторите пароль"
+      rules="required|password"
+      :confirmed="password"
+    />
     <MoleculesSelect :model="city" :options="list" required @change="onList" />
     <AtomsCheckbox id="fuckyou" v-model="cond" required clearable />
     <AtomsInput

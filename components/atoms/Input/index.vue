@@ -1,22 +1,27 @@
 <template>
   <label
     ref="field"
-    :class="[{
-      'is-focused': isFocus,
-      'has-value': value,
-      'has-error': error.length,
-      'is-disabled': disabled,
-      'is-required': isRequired,
-      'has-hint': hint,
-      textarea: textarea,
-      'show-error': showError,
-      'has-placeholder': !getPlaceholder.length && placeholder
-    }, styleType]"
+    :class="[
+      {
+        'is-focused': isFocus,
+        'has-value': value,
+        'has-error': error.length,
+        'is-disabled': disabled,
+        'is-required': isRequired,
+        'has-hint': hint,
+        textarea: textarea,
+        'show-error': showError,
+        'has-placeholder': !getPlaceholder.length && placeholder,
+      },
+      styleType,
+    ]"
     :for="name"
     class="input validate-me"
   >
     <!-- Placeholder for input type "animate" -->
-    <div v-if="placeholder && styleType !== 'placeholder'" class="placeholder">{{ placeholder }}</div>
+    <div v-if="placeholder && styleType !== 'placeholder'" class="placeholder">
+      {{ placeholder }}
+    </div>
 
     <!--    Mask, rules-->
     <input
@@ -290,11 +295,15 @@ export default {
     if (this.rules) {
       this.formatRules = this.rules.split('|').map((rule) => {
         const [key, value] = rule.split(':')
-        return rule.includes(':') ? { name: key, value } : { name: key, value: key }
+        return rule.includes(':')
+          ? { name: key, value }
+          : { name: key, value: key }
       })
 
       // If there is confirmed, setting watch for confirmed
-      if (this.confirmed) { this.confirmedInit() }
+      if (this.confirmed) {
+        this.confirmedInit()
+      }
 
       this.validate(this.value)
     }
@@ -322,18 +331,13 @@ export default {
       // Update confirmed value
       if (this.confirmed) {
         this.formatRules.pop()
-        this.formatRules.push(
-          {
-            name: 'confirmed',
-            value: this.confirmed,
-          }
-        )
+        this.formatRules.push({
+          name: 'confirmed',
+          value: this.confirmed,
+        })
       }
 
-      this.error = this.$services.validate.validate(
-        this.formatRules,
-        value
-      )
+      this.error = this.$services.validate.validate(this.formatRules, value)
     },
     // PreValidate check if rules exist
     validateCheck(e) {
@@ -345,7 +349,10 @@ export default {
     // Cursor selection position save
     onKey(e) {
       if (this.mask) {
-        const selectionEl = this.$refs.field.querySelector(['input', 'textarea'])
+        const selectionEl = this.$refs.field.querySelector([
+          'input',
+          'textarea',
+        ])
         this.selection = {
           start: selectionEl.selectionStart,
           end: selectionEl.selectionEnd,
@@ -353,9 +360,10 @@ export default {
         }
 
         if (e.key === 'Backspace') {
-          this.selection.current = selectionEl.selectionStart === selectionEl.selectionEnd
-            ? selectionEl.selectionStart - 1
-            : selectionEl.selectionStart
+          this.selection.current =
+            selectionEl.selectionStart === selectionEl.selectionEnd
+              ? selectionEl.selectionStart - 1
+              : selectionEl.selectionStart
         } else if (e.code === 'KeyV' && (e.ctrlKey || e.metaKey)) {
           this.selection.current = null
         } else {
@@ -385,7 +393,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 $border: 1px solid blue;
 $border-hover: 1px solid darkblue;
 $border-focus: 1px solid midnightblue;
@@ -406,20 +413,20 @@ $input-size: 16px;
 
 $placeholder-default-size: 16px;
 $placeholder-default-color: black;
-$placeholder-default-opacity: .7;
-$placeholder-default-disabled-opacity: .5;
+$placeholder-default-opacity: 0.7;
+$placeholder-default-disabled-opacity: 0.5;
 $placeholder-default-bottom: 8px;
 
 $placeholder-size: 16px;
 $placeholder-color: black;
-$placeholder-opacity: .7;
-$placeholder-disabled-opacity: .5;
+$placeholder-opacity: 0.7;
+$placeholder-disabled-opacity: 0.5;
 
 $placeholder-animate-size: 16px;
 $placeholder-animate-color: black;
-$placeholder-animate-opacity: .7;
-$placeholder-animate-disabled-opacity: .5;
-$placeholder-animate-transition: .6s ease;
+$placeholder-animate-opacity: 0.7;
+$placeholder-animate-disabled-opacity: 0.5;
+$placeholder-animate-transition: 0.6s ease;
 
 $error-size: 16px;
 $error-color: red;
@@ -431,7 +438,8 @@ $icons-size: 24px;
   display: block;
   position: relative;
 
-  .clear, .password {
+  .clear,
+  .password {
     position: absolute;
     top: calc(($input-height - $icons-size) / 2);
     right: 20px;
@@ -441,14 +449,22 @@ $icons-size: 24px;
   }
 
   &.default.has-placeholder {
-    .clear, .password {
-      top: calc(($input-height - $icons-size) / 2 + ($placeholder-default-size * 1.2 + $placeholder-default-bottom));
+    .clear,
+    .password {
+      top: calc(
+        ($input-height - $icons-size) / 2 +
+          ($placeholder-default-size * 1.2 + $placeholder-default-bottom)
+      );
     }
   }
 
-  .clear {display: none}
+  .clear {
+    display: none;
+  }
 
-  &.has-value .clear {display: block}
+  &.has-value .clear {
+    display: block;
+  }
 
   &.has-value:not(.textarea) {
     .clear {
@@ -460,7 +476,8 @@ $icons-size: 24px;
     opacity: 0.7;
   }
 
-  input, textarea {
+  input,
+  textarea {
     width: 100%;
     height: $input-height;
     padding: $input-padding-y $input-padding-x;
@@ -479,7 +496,9 @@ $icons-size: 24px;
       background: $background-focus;
     }
 
-    &:focus-visible {outline: none}
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   &.is-disabled {
@@ -552,14 +571,17 @@ $icons-size: 24px;
       margin-bottom: 0;
     }
 
-    &.has-value, &.is-focused {
-      input, textarea {
-        padding: calc($input-padding-y * 1.5) $input-padding-x ($input-padding-y * .5);
+    &.has-value,
+    &.is-focused {
+      input,
+      textarea {
+        padding: calc($input-padding-y * 1.5) $input-padding-x
+          ($input-padding-y * 0.5);
       }
 
       .placeholder {
-        font-size: calc($placeholder-animate-size * .8);
-        top: calc(($input-height - ($placeholder-animate-size * .8)) / 5);
+        font-size: calc($placeholder-animate-size * 0.8);
+        top: calc(($input-height - ($placeholder-animate-size * 0.8)) / 5);
       }
     }
   }

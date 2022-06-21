@@ -3,18 +3,18 @@ const tokens: any = {
     pattern: /\d/,
   },
   X: {
-    pattern: /[0-9a-zA-Z]/
+    pattern: /[0-9a-zA-Z]/,
   },
   S: {
-    pattern: /[a-zA-Z]/
+    pattern: /[a-zA-Z]/,
   },
   A: {
     pattern: /[a-zA-Z]/,
-    transform: (v: any) => v.toLocaleUpperCase()
+    transform: (v: any) => v.toLocaleUpperCase(),
   },
   a: {
     pattern: /[a-zA-Z]/,
-    transform: (v: any) => v.toLocaleLowerCase()
+    transform: (v: any) => v.toLocaleLowerCase(),
   },
 }
 
@@ -45,7 +45,15 @@ class Mask {
 
   private masking: any = {
     string: (mask: string, value: string, selection?: any): string => {
-      let [position, result, has, selectionTrigger, ignore, ignoreCount, ignoreCountUpper] = [0, '', -1, false, false, 0, 0]
+      let [
+        position,
+        result,
+        has,
+        selectionTrigger,
+        ignore,
+        ignoreCount,
+        ignoreCountUpper,
+      ] = [0, '', -1, false, false, 0, 0]
       const clearMask = Mask.clearable(mask)
       mask.split('').forEach((maskChar: string, index: number) => {
         if (index - ignoreCount === selection?.current - 1) {
@@ -60,10 +68,12 @@ class Mask {
               tokens[maskChar].pattern.test(value[position]) &&
               value[position] !== clearMask[position]
             ) {
-              result += (tokens[maskChar].transform ? tokens[maskChar].transform(value[position]) : value[position])
+              result += tokens[maskChar].transform
+                ? tokens[maskChar].transform(value[position])
+                : value[position]
               ignoreCount += ignoreCountUpper
               position++
-              [has, ignoreCountUpper] = [index, 0]
+              ;[has, ignoreCountUpper] = [index, 0]
               break
             }
             position++

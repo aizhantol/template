@@ -103,7 +103,7 @@ export default {
     return {
       isOpen: false,
       showError: false,
-      focused: false
+      focused: false,
     }
   },
   computed: {
