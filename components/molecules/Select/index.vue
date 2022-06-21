@@ -8,6 +8,7 @@
         'is-required': required,
         'show-error': showError,
         'has-error': hasError,
+        'has-focused': focused,
       },
       color,
     ]"
@@ -102,6 +103,7 @@ export default {
     return {
       isOpen: false,
       showError: false,
+      focused: false,
     }
   },
   computed: {
@@ -112,7 +114,6 @@ export default {
       }
     },
     hasError() {
-      console.log(this.selected)
       return !this.selected.id && this.required
     },
   },
@@ -136,6 +137,7 @@ export default {
      */
     contentHandler() {
       this.isOpen = !this.isOpen
+      this.focued = true
     },
     /**
      * Method to close content on click outside of the component
@@ -148,8 +150,8 @@ export default {
         )
       ) {
         this.isOpen = false
+        this.showError = true
       }
-      this.showError = true
     },
     /**
      * Method to select option

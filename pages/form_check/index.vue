@@ -3,17 +3,51 @@
     <AtomsInput
       v-model="name"
       name="Имя"
-      rules="required|max:3"
-      :mask="'+7 (###) ###-##-##'"
+      rules="required|max:100"
+      placeholder="name"
+      :mask="'+2 (###) ###-SX-?Aa---#SS$$$aaAAA'"
     />
-    <AtomsInput v-model="surname" name="Фамилия" rules="required|min:3" />
-    <AtomsInput v-model="email" name="Почта" rules="required|email" />
+    <AtomsInput
+      v-model="surname"
+      name="Фамилия"
+      rules="required|min:3"
+      clearable
+      placeholder="surname"
+    />
+    <AtomsInput
+      v-model="email"
+      name="Почта"
+      rules="required|email"
+      clearable
+      styleType="animate"
+      placeholder="email"
+    />
+    <AtomsInput
+      id="password"
+      v-model="password"
+      type="password"
+      placeholder="password"
+      name="Пароль"
+      rules="required|password"
+      clearable
+    />
+    <AtomsInput
+      v-model="passwordRepeat"
+      type="password"
+      name="Повторите пароль"
+      rules="required|password"
+      :confirmed="password"
+    />
     <MoleculesSelect :model="city" :options="list" required @change="onList" />
+    <AtomsCheckbox id="fuckyou" v-model="cond" required clearable />
     <AtomsInput
       v-model="description"
+      placeholder="description"
       textarea
       name="Описание"
       rules="required|max:200|alpha"
+      clearable
+      styleType="animate"
     />
     <AtomsButton type="submit">submit</AtomsButton>
   </MoleculesForm>
@@ -27,9 +61,12 @@
 export default {
   name: 'FormCheck',
   data: () => ({
-    name: '3323',
+    name: '5671',
     surname: 'a',
     email: '',
+    password: '',
+    passwordRepeat: '',
+    cond: false,
     city: '',
     description: '',
     list: [
@@ -65,46 +102,6 @@ export default {
         id: 7,
         name: 'Челябинск',
       },
-      {
-        id: 8,
-        name: 'Омск',
-      },
-      {
-        id: 9,
-        name: 'Самара',
-      },
-      {
-        id: 10,
-        name: 'Ростов-на-Дону',
-      },
-      {
-        id: 11,
-        name: 'Уфа',
-      },
-      {
-        id: 12,
-        name: 'Красноярск',
-      },
-      {
-        id: 13,
-        name: 'Пермь',
-      },
-      {
-        id: 14,
-        name: 'Воронеж',
-      },
-      {
-        id: 15,
-        name: 'Волгоград',
-      },
-      {
-        id: 16,
-        name: 'Краснодар',
-      },
-      {
-        id: 17,
-        name: 'Красноярск',
-      },
     ],
   }),
   methods: {
@@ -112,9 +109,7 @@ export default {
       console.log('submit')
     },
     onList(e) {
-      console.log(e)
       this.city = e
-      console.log(this.city)
     },
   },
 }

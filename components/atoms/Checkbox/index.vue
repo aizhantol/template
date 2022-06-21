@@ -1,5 +1,9 @@
 <template>
-  <label :for="id" class="checkbox">
+  <label
+    :for="id"
+    class="checkbox validate-me"
+    :class="{ 'has-error': required && !value }"
+  >
     <input
       :id="id"
       v-model="model"
@@ -46,6 +50,13 @@ export default {
      * @model
      */
     value: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Required state of the checkbox
+     */
+    required: {
       type: Boolean,
       default: false,
     },
