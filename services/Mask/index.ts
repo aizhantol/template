@@ -2,6 +2,20 @@ const tokens: any = {
   '#': {
     pattern: /\d/,
   },
+  X: {
+    pattern: /[0-9a-zA-Z]/
+  },
+  S: {
+    pattern: /[a-zA-Z]/
+  },
+  A: {
+    pattern: /[a-zA-Z]/,
+    transform: (v: any) => v.toLocaleUpperCase()
+  },
+  a: {
+    pattern: /[a-zA-Z]/,
+    transform: (v: any) => v.toLocaleLowerCase()
+  },
 }
 
 class Mask {
@@ -13,37 +27,80 @@ class Mask {
     )
   }
 
-  private masking(mask: string, value: string): any {
-    let [position, result, has] = [0, '', -1]
-    mask.split('').forEach((maskChar: string, index: number) => {
-      if (Object.keys(tokens).includes(maskChar)) {
-        while (position < value.length) {
-          if (
-            tokens[maskChar].pattern.test(value[position]) &&
-            value[position] !== mask[position]
-          ) {
-            result += value[position]
-            position++
-            has = index
-            break
-          }
-          position++
-        }
-      } else if (position < value.length) {
-        result += maskChar
+  private static clearable(mask: string): string {
+    let clearMask: string = ''
+    for (let i = 0; i < mask.length; i++) {
+      if (mask[i] === '?') {
+        clearMask += mask[++i]
+      } else {
+        clearMask += mask[i]
       }
-    })
-    return has > -1 ? result.substring(0, has + 1) : ''
+    }
+    return clearMask
   }
 
-  public mask(mask: any[], value: string): any {
+  // private static normalize(mask: any[]): any {
+  //
+  // }
+
+  private masking: any = {
+    string: (mask: string, value: string, selection?: any): string => {
+      let [position, result, has, selectionTrigger, ignore, ignoreCount, ignoreCountUpper] = [0, '', -1, false, false, 0, 0]
+      const clearMask = Mask.clearable(mask)
+      mask.split('').forEach((maskChar: string, index: number) => {
+        if (index - ignoreCount === selection?.current - 1) {
+          selectionTrigger = true
+        }
+        if (maskChar === '?') {
+          ignore = true
+        } else if (Object.keys(tokens).includes(maskChar) && !ignore) {
+          selectionTrigger = false
+          while (position < value.length) {
+            if (
+              tokens[maskChar].pattern.test(value[position]) &&
+              value[position] !== clearMask[position]
+            ) {
+              result += (tokens[maskChar].transform ? tokens[maskChar].transform(value[position]) : value[position])
+              ignoreCount += ignoreCountUpper
+              position++
+              [has, ignoreCountUpper] = [index, 0]
+              break
+            }
+            position++
+          }
+        } else if (position < value.length) {
+          if (selectionTrigger) {
+            selection.current++
+          }
+          if (ignore) {
+            ignore = false
+            ignoreCountUpper++
+          }
+          result += maskChar
+        }
+      })
+      if (selection && !selection.current) {
+        selection.current = has + 1
+      }
+      return has > -1 ? result.substring(0, has - ignoreCount + 1) : ''
+    },
+
+    // array: (mask: any[], value: string, selection?: any): string => {
+    //   mask.forEach(maskType => {
+    //
+    //   })
+    // }
+  }
+
+  private static typeOf(mask: any[]): any {
     if (Array.isArray(mask)) {
-      // @ts-ignore
-    } else if (typeof mask === 'object') {
-      // @ts-ignore
-    } else {
-      return this.masking(mask, value)
+      return 'array'
     }
+    return typeof mask
+  }
+
+  public mask(mask: any[], value: string, selection: object): any {
+    return this.masking[Mask.typeOf(mask)](mask, value, selection)
   }
 }
 

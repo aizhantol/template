@@ -111,6 +111,13 @@ const listOfRules: any = {
       : { valid: false, message: 'This field must be a valid alpha_space' }
   },
 
+  password: (e: string) => {
+    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
+    return re.test(e)
+      ? { valid: true }
+      : { valid: false, message: 'This field must be a valid password' }
+  },
+
   confirmed: (e: string, confirmed: string) => {
     return e === confirmed
       ? { valid: true }
