@@ -1,23 +1,24 @@
 <template>
   <div>
-    <div class="container" />
-    <AtomsButton> nnn </AtomsButton>
-    <AtomsButton type="secondary" @click="show">nnn</AtomsButton>
-    <AtomsButton type="small">nnn</AtomsButton>
-    <AtomsButton type="small-outline">nnn</AtomsButton>
-    <AtomsButton type="outline">nnn</AtomsButton>
-    <AtomsButton type="inline">nnn</AtomsButton>
-    <AtomsButton type="icon">nnn</AtomsButton>
-    <AtomsButton type="icon-white">nnn</AtomsButton>
-    <AtomsLazyLoadImage
-      :url="require('~/assets/img/main.png')"
-      caption="Aizhaaaaan"
-    />
+    <OrganismsSlider>
+      <MoleculesSlide v-for="(slide, id) in slides" :id="id" :key="id">
+        <img :src="slide" alt="slide" />
+      </MoleculesSlide>
+    </OrganismsSlider>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      slides: [
+        require('~/assets/img/result3.png'),
+        require('~/assets/img/result1.png'),
+        require('~/assets/img/result3.png'),
+      ],
+    }
+  },
   methods: {
     show() {
       this.$modal.add({ title: 'Main' })
@@ -25,10 +26,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.container {
-  background: red;
-  height: 1000px;
-  width: 100%;
-}
-</style>
