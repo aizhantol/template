@@ -189,11 +189,11 @@ export default {
     },
     /**
      * Маска для поля
+     *
      * @format [
      *          String,
-     *          String[],
      *          {
-     *            mask: [String, String[]],
+     *            mask: String,
      *            custom: [{
      *              symbol: Char,
      *              pattern: RegExp,
@@ -202,12 +202,31 @@ export default {
      *          }
      *      ]
      *
-     * @example :mask="['TK-@@@@', 'LK-####']"
+     * @example :mask="{
+     *           mask: 'Hh:Mm am',
+     *           custom: [
+     *            {
+     *              symbol: 'H',
+     *              pattern: /[0-1]/,
+     *            },
+     *            {
+     *              symbol: 'h',
+     *              pattern: /[0-9]/,
+     *            },
+     *            {
+     *              symbol: 'M',
+     *              pattern: /[0-6]/,
+     *            },
+     *            {
+     *              symbol: 'm',
+     *              pattern: /[0-9]/,
+     *            },
+     *          ]
+     *        }"
      * T: ['E', 'R']
      * K: ['E', 'A']
      *
-     *
-     * @type {String, Array, Object}
+     * @type {String}
      */
     mask: {
       type: [String, Array, Object],
@@ -344,6 +363,8 @@ export default {
       if (this.rules) {
         this.validate(e.target.value)
         this.showError = true
+      } else {
+        this.error = []
       }
     },
     // Cursor selection position save
@@ -412,18 +433,19 @@ $input-height: 56px;
 $input-size: 16px;
 
 $placeholder-default-size: 16px;
-$placeholder-default-color: black;
+$placeholder-default-color: gray;
+$placeholder-default-error-color: red;
 $placeholder-default-opacity: 0.7;
 $placeholder-default-disabled-opacity: 0.5;
 $placeholder-default-bottom: 8px;
 
 $placeholder-size: 16px;
-$placeholder-color: black;
+$placeholder-color: gray;
 $placeholder-opacity: 0.7;
 $placeholder-disabled-opacity: 0.5;
 
 $placeholder-animate-size: 16px;
-$placeholder-animate-color: black;
+$placeholder-animate-color: gray;
 $placeholder-animate-opacity: 0.7;
 $placeholder-animate-disabled-opacity: 0.5;
 $placeholder-animate-transition: 0.6s ease;
@@ -486,6 +508,13 @@ $icons-size: 24px;
     transition: $input-transition;
     background: $background;
 
+    &::placeholder {
+      font-size: $placeholder-default-size;
+      color: $placeholder-default-color;
+      opacity: $placeholder-default-opacity;
+      margin-bottom: $placeholder-default-bottom;
+    }
+
     &:hover {
       border: $border-hover;
       background: $background-hover;
@@ -541,18 +570,26 @@ $icons-size: 24px;
     .errors {
       display: flex;
     }
+
+    .placeholder {
+      color: $placeholder-default-error-color;
+    }
   }
 
   &.placeholder {
-    .placeholder {
-      font-size: $placeholder-size;
-      color: $placeholder-color;
-      opacity: $placeholder-opacity;
+    input, textarea {
+      &::placeholder {
+        font-size: $placeholder-size;
+        color: $placeholder-color;
+        opacity: $placeholder-opacity;
+      }
     }
 
     &.is-disabled {
-      .placeholder {
-        opacity: $placeholder-disabled-opacity;
+      input, textarea {
+        &::placeholder {
+          opacity: $placeholder-disabled-opacity;
+        }
       }
     }
   }
