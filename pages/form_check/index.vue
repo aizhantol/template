@@ -3,9 +3,8 @@
     <AtomsInput
       v-model="name"
       name="Имя"
-      rules="required|max:100"
       placeholder="name"
-      :mask="'+2 (###) ###-SX-?Aa---#SS$$$aaAAA'"
+      :mask="{mask: 'T', custom: [{ symbol: 'T', pattern: /^\d+$/, rule: (v) => +v > 30 }]}"
     />
     <AtomsInput
       v-model="surname"
@@ -47,7 +46,7 @@
       name="Описание"
       rules="required|max:200|alpha"
       clearable
-      styleType="animate"
+      styleType="placeholder"
     />
     <AtomsButton type="submit">submit</AtomsButton>
   </MoleculesForm>
