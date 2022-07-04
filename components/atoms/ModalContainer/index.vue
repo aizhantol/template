@@ -29,6 +29,17 @@ export default {
   justify-content: center;
   z-index: 500;
 }
+
+@keyframes animModal {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 .modal-container {
   background: #fff;
   box-shadow: 0px 0px 30px rgba(53, 56, 161, 0.07);
@@ -39,17 +50,7 @@ export default {
   overflow: auto;
   max-height: calc(100vh - 20px);
   padding: 32px;
-  animation: animModal 0.4s cubic-bezier(0.11, 0.72, 0.56, 1.28);
-}
-@keyframes animModal {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+  animation: animModal 0.5s cubic-bezier(0.11, 0.72, 0.56, 1.28);
 }
 .modal-close {
   @include size(16px);
@@ -81,7 +82,7 @@ export default {
     opacity: 0;
   }
   to {
-    opacity: 0.2;
+    opacity: 0.6;
   }
 }
 </style>
