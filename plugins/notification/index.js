@@ -15,7 +15,6 @@ export default ({ store }, inject) => {
       })
     },
     remove(index) {
-      console.log(index)
       store.commit('notifications/deleteNotification', index)
     },
   }
