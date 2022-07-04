@@ -35,7 +35,7 @@
         @change="(val) => (selectedSwitcher = val)"
       />
     </template>
-
+    <AtomsButton class="mt30 mb30" @click="showMod"> Show Modal!</AtomsButton>
     <AtomsHeading type="h2"> Slider</AtomsHeading>
     <div class="slider-cont">
       <OrganismsSlider :options="options">
@@ -137,8 +137,8 @@ export default {
     }
   },
   methods: {
-    show() {
-      this.$modal.add({ title: 'Main' })
+    showMod() {
+      this.$modal.add({ title: 'Delete' })
     },
   },
 }
