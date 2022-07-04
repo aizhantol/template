@@ -12,18 +12,30 @@
 export default {
   name: 'Form',
   props: {
+    /**
+     * Method handled on submit
+     */
     onSubmit: {
       type: Function,
       required: true,
     },
+    /**
+     * Data object
+     */
     data: {
       type: Object,
       default: () => ({}),
     },
+    /**
+     * Data sent
+     */
     errorScroll: {
       type: Boolean,
       default: true,
     },
+    /**
+     * Show errors
+     */
     errorShow: {
       type: Boolean,
       default: false,
