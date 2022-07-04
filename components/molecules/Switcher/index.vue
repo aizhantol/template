@@ -60,7 +60,7 @@ $switch-active-text: #fbfbfb;
   width: 252px;
   display: flex;
   padding: 4px 6px;
-  background: #fff;
+  background: #f3f5f8;
   border-radius: 10px;
   label {
     width: 120px;
@@ -69,7 +69,7 @@ $switch-active-text: #fbfbfb;
     color: $switch-color;
     text-align: center;
     padding: 10px 0;
-    background: #fff;
+    background: #f3f5f8;
     transition: 0.3s;
     cursor: pointer;
     &:last-child {
