@@ -25,15 +25,24 @@ export default {
     event: 'change',
   },
   props: {
+    /**
+     * Names array
+     */
     names: {
       type: Array,
       default: () => [],
     },
-
+    /**
+     * Размер таба
+     * @values small, ''
+     */
     width: {
       type: [String, Number],
       default: '',
     },
+    /**
+     * значение input
+     */
     value: {
       type: [String, Number],
       default: '',
