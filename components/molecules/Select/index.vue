@@ -137,7 +137,7 @@ export default {
      */
     contentHandler() {
       this.isOpen = !this.isOpen
-      this.focued = true
+      this.focused = true
     },
     /**
      * Method to close content on click outside of the component
@@ -150,7 +150,7 @@ export default {
         )
       ) {
         this.isOpen = false
-        this.showError = true
+        this.showError = this.focused
       }
     },
     /**

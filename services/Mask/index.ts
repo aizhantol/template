@@ -1,22 +1,19 @@
 const tokens: any = {
   '#': {
-    pattern: /^\d$/,
-  },
-  '@': {
-    pattern: /^\d+$/,
+    pattern: /\d/,
   },
   X: {
-    pattern: /[0-9a-zA-Z]?/,
+    pattern: /[0-9a-zA-Z]/,
   },
   S: {
-    pattern: /^[a-zA-Z]+$/,
+    pattern: /[a-zA-Z]/,
   },
   A: {
-    pattern: /[a-zA-Z]?/,
+    pattern: /[a-zA-Z]/,
     transform: (v: any) => v.toLocaleUpperCase(),
   },
   a: {
-    pattern: /[a-zA-Z]?/,
+    pattern: /[a-zA-Z]/,
     transform: (v: any) => v.toLocaleLowerCase(),
   },
 }
@@ -56,7 +53,7 @@ class Mask {
         ignore,
         ignoreCount,
         ignoreCountUpper,
-      ] = [0, '', 0, false, false, 0, 0]
+      ] = [0, '', -1, false, false, 0, 0]
       const clearMask = Mask.clearable(mask)
       mask.split('').forEach((maskChar: string, index: number) => {
         if (index - ignoreCount === selection?.current - 1) {
@@ -66,7 +63,6 @@ class Mask {
           ignore = true
         } else if (Object.keys(tokens).includes(maskChar) && !ignore) {
           selectionTrigger = false
-          let token = ''
           while (position < value.length) {
             if (
               tokens[maskChar].pattern.test(value[position]) &&
@@ -75,17 +71,10 @@ class Mask {
               result += tokens[maskChar].transform
                 ? tokens[maskChar].transform(value[position])
                 : value[position]
-              token += result[result.length - 1]
+              ignoreCount += ignoreCountUpper
               position++
               has++
-              if (tokens[maskChar].pattern.test(token + (value[position] ?? ''))) {
-                continue
-              }
-              if (tokens[maskChar]?.rule && !tokens[maskChar].rule(token) && value[position]) {
-                console.log('error')
-              }
-              ignoreCount += ignoreCountUpper
-              ignoreCountUpper = 0
+              ;[has, ignoreCountUpper] = [index, 0]
               break
             }
             position++
@@ -104,7 +93,7 @@ class Mask {
       if (selection && !selection.current) {
         selection.current = has + 1
       }
-      return has ? result.substring(0, has - ignoreCount + 1) : ''
+      return has > -1 ? result.substring(0, has - ignoreCount + 1) : ''
     },
 
     // Coming soon
@@ -142,11 +131,11 @@ class Mask {
           symbol: custom.symbol,
           pattern: custom.pattern,
           transform: custom.transform,
-          rule: custom.rule
+          rule: custom.rule,
         }
       })
       return this.masking.string(mask.mask, value, selection)
-    }
+    },
   }
 
   private static typeOf(mask: any[]): any {

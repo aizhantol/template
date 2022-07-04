@@ -30,6 +30,9 @@ export const mutations: MutationTree<StateT> = {
    * @type {number}
    */
   deleteNotification(state, indexByArray: number) {
-    state.notifications.splice(indexByArray, 1)
+    state.notifications.splice(
+      state.notifications.findIndex((item) => indexByArray === item.id),
+      1
+    )
   },
 }

@@ -577,7 +577,8 @@ $icons-size: 24px;
   }
 
   &.placeholder {
-    input, textarea {
+    input,
+    textarea {
       &::placeholder {
         font-size: $placeholder-size;
         color: $placeholder-color;
@@ -586,7 +587,8 @@ $icons-size: 24px;
     }
 
     &.is-disabled {
-      input, textarea {
+      input,
+      textarea {
         &::placeholder {
           opacity: $placeholder-disabled-opacity;
         }

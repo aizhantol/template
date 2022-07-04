@@ -4,7 +4,7 @@
       v-model="name"
       name="Имя"
       placeholder="name"
-      :mask="{mask: 'T', custom: [{ symbol: 'T', pattern: /^\d+$/, rule: (v) => +v > 30 }]}"
+      :mask="'+7 (###) ###-##-##'"
     />
     <AtomsInput
       v-model="surname"
@@ -21,6 +21,7 @@
       styleType="animate"
       placeholder="email"
     />
+    <i class="icon-delete" />
     <AtomsInput
       id="password"
       v-model="password"
@@ -30,6 +31,7 @@
       rules="required|password"
       clearable
     />
+    <AtomsButton @click="notification" />
     <AtomsInput
       v-model="passwordRepeat"
       type="password"
@@ -60,8 +62,8 @@
 export default {
   name: 'FormCheck',
   data: () => ({
-    name: '5671',
-    surname: 'a',
+    name: '',
+    surname: '',
     email: '',
     password: '',
     passwordRepeat: '',
@@ -109,6 +111,16 @@ export default {
     },
     onList(e) {
       this.city = e
+    },
+    notification() {
+      this.$notification.success({
+        title: 'Успешно',
+        description: 'Вы успешно зарегистрировались',
+      })
+      this.$notification.error({
+        title: 'Ошибка',
+        description: 'Произошла ошибка',
+      })
     },
   },
 }

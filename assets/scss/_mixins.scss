@@ -160,6 +160,12 @@
   }
 }
 
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin authBlockTemplate {
   background: white;
   width: min-content;
@@ -181,4 +187,9 @@
   @include phone {
     padding: 25px;
   }
+}
+
+@mixin container-out {
+  margin-left: calc((100vw - 100%) / -2);
+  margin-right: calc((100vw - 100%) / -2);
 }

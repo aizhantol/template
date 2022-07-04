@@ -1,5 +1,5 @@
 <template>
-  <component :is="type.toLowerCase()" :class="color">
+  <component :is="type.toLowerCase()">
     <!--
       @slot slot for type of component
     -->
@@ -24,25 +24,19 @@ export default {
       default: 'h1',
       required: true,
     },
-    color: {
-      type: String,
-      default: 'main',
-    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.main {
-  color: $c-text;
-}
-.base {
-  color: $c-base;
-}
-.blue {
-  color: $c-main;
-}
-.white {
-  color: #fff;
+$hs: (24px 800 29px), (24px 600 29px), (16px 800 20px), (16px 700 20px),
+  (16px 500 20px), (14px 500 18px);
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-size: nth(nth($hs, $i), 1);
+    font-weight: nth(nth($hs, $i), 2);
+    line-height: nth(nth($hs, $i), 3);
+  }
 }
 </style>
