@@ -38,7 +38,7 @@ span {
   line-height: 16px;
   letter-spacing: -0.3px;
   color: $c-main;
-  margin: 0px 12px;
+  margin: 0 12px;
 }
 .btn {
   display: block;

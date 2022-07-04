@@ -32,6 +32,7 @@ export default {
     { src: '~/plugins/modal.ts' },
     { src: '~/plugins/services/index.ts' },
     { src: '~/plugins/repositories/index.ts' },
+    { src: '~/plugins/notification' },
   ],
   alias: {
     atoms: resolve(__dirname, 'components/atoms'),

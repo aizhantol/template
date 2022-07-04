@@ -143,11 +143,11 @@ class Slideshow {
 }
 
 export default {
-//   props: {
-//     pagination: {
-//       type: {},
-//     },
-//   },
+  //   props: {
+  //     pagination: {
+  //       type: {},
+  //     },
+  //   },
   mounted() {
     window.addEventListener('load', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

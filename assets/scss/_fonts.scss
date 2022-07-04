@@ -1,59 +1,18 @@
-@font-face {
-  font-family: 'Gilroy';
-  src: url('~/assets/fonts/Gilroy-Regular.eot');
-  src: local('Gilroy Regular'), local('Gilroy-Regular'),
-    url('~/assets/fonts/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
-    url('~/assets/fonts/Gilroy-Regular.woff2') format('woff2'),
-    url('~/assets/fonts/Gilroy-Regular.woff') format('woff'),
-    url('~/assets/fonts/Gilroy-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+@import 'variables';
 
-@font-face {
-  font-family: 'Gilroy';
-  src: url('~/assets/fonts/Gilroy-Bold.eot');
-  src: local('Gilroy Bold'), local('Gilroy-Bold'),
-    url('~/assets/fonts/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
-    url('~/assets/fonts/Gilroy-Bold.woff2') format('woff2'),
-    url('~/assets/fonts/Gilroy-Bold.woff') format('woff'),
-    url('~/assets/fonts/Gilroy-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
+$fontLinks: ExtraLight 100 normal, Light 300 normal, Regular 400 normal,
+  Medium 500 normal, SemiBold 600 normal, Bold 700 normal, ExtraBold 800 normal,
+  Black 900 normal, ExtraLightItalic 100 italic, LightItalic 300 italic,
+  Italic 400 italic, MediumItalic 500 italic, SemiBoldItalic 600 italic,
+  BoldItalic 700 italic, ExtraBoldItalic 800 italic, BlackItalic 900 italic;
 
-@font-face {
-  font-family: 'Gilroy';
-  src: url('~/assets/fonts/Gilroy-Semibold.eot');
-  src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
-    url('~/assets/fonts/Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
-    url('~/assets/fonts/Gilroy-Semibold.woff2') format('woff2'),
-    url('~/assets/fonts/Gilroy-Semibold.woff') format('woff'),
-    url('~/assets/fonts/Gilroy-Semibold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+@each $font in $fontLinks {
+  @font-face {
+    font-family: $font-family;
+    font-weight: #{nth($font, 2)};
+    font-style: #{nth($font, 3)};
+    src: local($font-family), local(#{$font-family}-#{nth($font, 1)}),
+      url('~/assets/fonts/#{$font-family}-#{nth($font, 1)}.ttf')
+        format('truetype');
+  }
 }
-
-@font-face {
-  font-family: 'Gilroy';
-  src: url('~/assets/fonts/Gilroy-Medium.eot');
-  src: local('Gilroy Medium'), local('Gilroy-Medium'),
-    url('~/assets/fonts/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
-    url('~/assets/fonts/Gilroy-Medium.woff2') format('woff2'),
-    url('~/assets/fonts/Gilroy-Medium.woff') format('woff'),
-    url('~/assets/fonts/Gilroy-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-// @font-face {
-//     font-family: 'Gilroy';
-//     src: url('~/assets/fonts/Gilroy-RegularItalic.eot');
-//     src: local('Gilroy Regular Italic'), local('Gilroy-RegularItalic'),
-//         url('~/assets/fonts/Gilroy-RegularItalic.eot?#iefix') format('embedded-opentype'),
-//         url('~/assets/fonts/Gilroy-RegularItalic.woff2') format('woff2'),
-//         url('~/assets/fonts/Gilroy-RegularItalic.woff') format('woff'),
-//         url('~/assets/fonts/Gilroy-RegularItalic.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: italic;
-// }
