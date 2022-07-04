@@ -1,38 +1,34 @@
 <template>
   <div
     ref="select"
-    class="select validate-me"
-    :class="[
-      {
-        selected: !!selected.id,
-        'is-required': required,
-        'show-error': showError,
-        'has-error': hasError,
-        'has-focused': focused,
-      },
-      color,
-    ]"
-    :style="{ width: width, height: height }"
+    class="select"
+    :class="{ selected: !!selected.id }"
+    :style="{ width: width }"
   >
     <span v-if="label" class="label">
       {{ label }}
     </span>
-    <button
-      type="button"
+    <label
+      :for="name"
       :class="['select__head', !!selected.id && 'select__head--active']"
-      @click="contentHandler()"
     >
-      {{ selected.name ? selected.name : selected.id }}
-      <div
-        :class="['select-arrow-down', isOpen && 'select-arrow-down--active']"
-      >
+      <input
+        :id="name"
+        v-model="text"
+        type="text"
+        :name="name"
+        @click="contentHandler"
+      />
+      {{ text }}
+      <span v-if="!text" class="plc">{{ placeholder }}</span>
+      <div :class="['select-arrow-down']">
         <img src="~/assets/icons/arrowDown.svg" alt="#" />
       </div>
-    </button>
+    </label>
     <transition name="fade">
       <div v-if="isOpen" class="select__content" :style="isOpen">
         <ul>
-          <template v-for="option in options">
+          <template v-for="option in getOptions">
             <li :key="option.id">
               <button
                 type="button"
@@ -63,13 +59,13 @@ export default {
       type: [String, Number, Object],
       default: null,
     },
-    color: {
-      type: String,
-      default: '',
-    },
 
     label: {
-      type: String,
+      type: [String, Number, Object],
+      default: '',
+    },
+    name: {
+      type: [String, Number, Object],
       default: '',
     },
     /**
@@ -81,11 +77,7 @@ export default {
     },
     width: {
       type: String,
-      default: null,
-    },
-    height: {
-      type: String,
-      default: null,
+      default: '100%',
     },
     /**
      * Placeholder when value is not selected
@@ -94,27 +86,22 @@ export default {
       type: String,
       default: 'Select me',
     },
-    required: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
       isOpen: false,
-      showError: false,
-      focused: false,
+      text: this.model.name,
     }
   },
   computed: {
     selected() {
       return {
-        id: this.model ? this.model : 0,
-        name: this.model ? this.getOptionName() : this.placeholder,
+        id: this.model.id ?? 0,
+        name: this.model.name ?? this.placeholder,
       }
     },
-    hasError() {
-      return !this.selected.id && this.required
+    getOptions() {
+      return this.options.filter((a) => a.name.includes(this.text))
     },
   },
   mounted() {
@@ -128,16 +115,11 @@ export default {
     })
   },
   methods: {
-    getOptionName() {
-      const option = this.options.find((item) => item.id === this.model)
-      return option ? option.name : this.placeholder
-    },
     /**
      * Method to open or close content
      */
     contentHandler() {
       this.isOpen = !this.isOpen
-      this.focused = true
     },
     /**
      * Method to close content on click outside of the component
@@ -150,7 +132,6 @@ export default {
         )
       ) {
         this.isOpen = false
-        this.showError = this.focused
       }
     },
     /**
@@ -158,31 +139,25 @@ export default {
      */
     optionSelectHandler(option) {
       this.contentHandler()
-      this.$emit('change', option.id)
+      this.text = option.name
+      this.$emit('change', option)
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-$select-main: #0084f4;
-$select-text: #262728;
-$select-grey: #e4e4e4;
-$select-error: #ff647c;
 .select {
+  // min-width: 350px;
   width: 100%;
   position: relative;
-
-  &.has-error.show-error {
-    background: $select-error;
-  }
-
+  height: 50px;
   .label {
     font-size: 16px;
     margin: 0 0 10px 0;
     font-weight: 400;
     display: block;
-    color: $select-grey;
+    color: $c-grey;
   }
   button {
     appearance: none;
@@ -203,11 +178,17 @@ $select-error: #ff647c;
     cursor: pointer;
     text-overflow: ellipsis;
     word-wrap: break-word;
-    border: none;
-    color: #999999;
+    border-radius: 10px;
+    border: 2px solid #e4e4e4;
+    color: $c-grey;
+    input {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
 
     &--active {
-      color: $select-text;
+      color: $c-text;
     }
 
     .select-arrow-down {
@@ -215,14 +196,10 @@ $select-error: #ff647c;
       justify-content: center;
       align-items: center;
       position: absolute;
-      right: 0;
+      right: 10px;
       top: 50%;
-      height: 100%;
-      padding: 0 20px;
+      padding: 5px;
       transform: translateY(-50%);
-      img {
-        width: 13px;
-      }
 
       &--active {
         transform: rotateX(180deg) translateY(50%) !important;
@@ -272,21 +249,17 @@ $select-error: #ff647c;
     text-align: left;
     background-color: transparent;
     border: none;
-    color: $select-text;
+    color: $c-text;
     transition: 0.25s;
     cursor: pointer;
     border-radius: 10px;
 
     &:hover,
     &--active {
-      color: $select-main;
+      color: $c-main;
       background: rgba(61, 99, 157, 0.2);
       letter-spacing: -0.3px;
     }
   }
-}
-.grey {
-  background: #f6f6f6;
-  border-radius: 10px;
 }
 </style>

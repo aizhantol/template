@@ -75,7 +75,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "@/assets/scss/main.scss";
+$radio-border: #999;
+$radio-background: $c-base;
+$radio-disabled: #3c474c;
 .radio {
   display: flex;
   align-items: center;
@@ -86,7 +88,7 @@ export default {
     display: block;
     width: 18px;
     height: 18px;
-    border: 1px solid #999;
+    border: 1px solid $radio-border;
     border-radius: 50%;
     margin-right: 8px;
     &::before {
@@ -97,7 +99,7 @@ export default {
       width: 12px;
       height: 12px;
       transform: translate(-50%, -50%);
-      background-color: $c-base;
+      background-color: $radio-background;
       border-radius: 50%;
       transition: 0.25s;
       opacity: 0;
@@ -112,13 +114,13 @@ export default {
       opacity: 1;
     }
     &:disabled ~ span.radio__indicator {
-      border-color: #3c474c;
+      border-color: $radio-disabled;
       &::before {
-        background-color: #3c474c;
+        background-color: $radio-disabled;
       }
     }
     &:disabled ~ span {
-      color: #3c474c;
+      color: $radio-disabled;
       opacity: 0.1;
     }
   }

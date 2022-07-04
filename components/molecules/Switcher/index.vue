@@ -25,15 +25,24 @@ export default {
     event: 'change',
   },
   props: {
+    /**
+     * Names array
+     */
     names: {
       type: Array,
       default: () => [],
     },
-
+    /**
+     * Размер таба
+     * @values small, ''
+     */
     width: {
       type: [String, Number],
       default: '',
     },
+    /**
+     * значение input
+     */
     value: {
       type: [String, Number],
       default: '',
@@ -53,20 +62,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$switch-color: #262728;
+$switch-active-back: #03b760;
+$switch-active-text: #fbfbfb;
 .switch {
   width: 252px;
   display: flex;
   padding: 4px 6px;
-  background: #fff;
+  background: #f3f5f8;
   border-radius: 10px;
   label {
     width: 120px;
     display: block;
     font-size: 16px;
-    color: $c-text;
+    color: $switch-color;
     text-align: center;
     padding: 10px 0;
-    background: #fff;
+    background: #f3f5f8;
     transition: 0.3s;
     cursor: pointer;
     &:last-child {
@@ -84,8 +96,8 @@ export default {
     }
 
     &.active {
-      color: $c-back;
-      background: $c-base;
+      color: $switch-active-text;
+      background: $switch-active-back;
       border-radius: 8px;
     }
   }

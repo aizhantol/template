@@ -84,12 +84,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$tab-color: #999999;
+$tab-active: $c-main;
+
 label,
 a {
   font-weight: 400;
   display: block;
   padding: 14px 30px;
-  color: #999999;
+  color: $tab-color;
 
   cursor: pointer;
 
@@ -108,7 +111,7 @@ a {
 
   &.active,
   &.nuxt-link-active {
-    color: $c-main;
+    color: $tab-active;
     font-weight: 600;
   }
   &.small {

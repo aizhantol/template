@@ -14,9 +14,9 @@ export const getters: GetterTree<RootState, RootState> = {
 export const mutations: MutationTree<RootState> = {}
 
 export const actions: ActionTree<RootState, RootState> = {
-  async nuxtServerInit(store: any) {
-    if (store.state.authNuxt.loggedIn) {
-      await store.dispatch('user/getProfile')
-    }
-  },
+  // async nuxtServerInit(store: any) {
+  // if (store.state.authNuxt.loggedIn) {
+  //   await store.dispatch('user/getProfile')
+  // }
+  // },
 }
