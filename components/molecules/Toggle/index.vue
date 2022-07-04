@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$toggle-color: #0084f4;
+$toggle-back: #00c48c;
+
 .tog {
   display: flex;
   align-items: center;
@@ -37,14 +40,14 @@ span {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.3px;
-  color: $c-main;
+  color: $toggle-color;
   margin: 0px 12px;
 }
 .btn {
   display: block;
   width: 51px;
   height: 31px;
-  background-color: $c-primary;
+  background-color: $toggle-back;
   border-radius: 15px;
   position: relative;
   border: none;

@@ -165,12 +165,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$select-main: #0084f4;
+$select-text: #262728;
+$select-grey: #e4e4e4;
+$select-error: #ff647c;
 .select {
   width: 100%;
   position: relative;
 
   &.has-error.show-error {
-    background: red;
+    background: $select-error;
   }
 
   .label {
@@ -178,7 +182,7 @@ export default {
     margin: 0 0 10px 0;
     font-weight: 400;
     display: block;
-    color: $c-grey;
+    color: $select-grey;
   }
   button {
     appearance: none;
@@ -203,7 +207,7 @@ export default {
     color: #999999;
 
     &--active {
-      color: $c-text;
+      color: $select-text;
     }
 
     .select-arrow-down {
@@ -268,14 +272,14 @@ export default {
     text-align: left;
     background-color: transparent;
     border: none;
-    color: $c-text;
+    color: $select-text;
     transition: 0.25s;
     cursor: pointer;
     border-radius: 10px;
 
     &:hover,
     &--active {
-      color: $c-main;
+      color: $select-main;
       background: rgba(61, 99, 157, 0.2);
       letter-spacing: -0.3px;
     }

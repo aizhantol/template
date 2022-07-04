@@ -27,11 +27,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$bread-color: #0084f4;
 li {
   display: flex;
   align-items: center;
   &:last-child a {
-    color: $c-base;
+    color: $bread-color;
   }
 
   > a {
@@ -44,7 +45,7 @@ li {
     overflow: hidden;
 
     &.nuxt-link-exact-active {
-      color: $c-base;
+      color: $bread-color;
       cursor: default;
     }
     &:active {

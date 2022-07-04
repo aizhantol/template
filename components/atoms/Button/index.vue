@@ -76,6 +76,8 @@ export default {
 </script>
 
 <style lang="scss">
+$btn-main: #0084f4;
+$btn-base: #03b760;
 .btn {
   position: relative;
   display: flex;
@@ -84,18 +86,16 @@ export default {
   appearance: none;
   border: 1px solid transparent;
   outline: none;
-  background-color: $c-main;
+  background-color: $btn-main;
   padding: 9px 30px;
   color: #fbfbfb;
   border-radius: 10px;
   font-size: rem(16);
   transition: $t-primary;
   cursor: pointer;
-  &:hover {
-    background-color: #0077b3;
-  }
+  &:hover,
   &:focus {
-    background-color: #0077b3;
+    opacity: 0.8;
   }
   &:disabled {
     opacity: 0.5;
@@ -120,8 +120,8 @@ export default {
     font-size: rem(14);
     border-radius: 5px;
     background-color: #fff;
-    border-color: $c-base;
-    color: $c-base;
+    border-color: $btn-base;
+    color: $btn-base;
     &:hover {
       background-color: #e6f7ff;
     }
@@ -134,8 +134,8 @@ export default {
 
   &--outline {
     background-color: #fff;
-    border-color: $c-main;
-    color: $c-main;
+    border-color: $btn-main;
+    color: $btn-main;
     font-weight: 600;
     &:hover {
       background-color: #e6f7ff;
@@ -145,13 +145,12 @@ export default {
   &--inline {
     padding: 0;
     background-color: transparent;
-    color: $c-base;
+    color: $btn-base;
     font-weight: 600;
     cursor: pointer;
     &:hover,
     &:focus {
-      background-color: transparent;
-      color: $c-base;
+      color: $btn-base;
     }
   }
 
@@ -163,7 +162,6 @@ export default {
     cursor: pointer;
     &:hover,
     &:focus {
-      background-color: transparent;
       color: $c-text;
     }
   }
@@ -182,16 +180,8 @@ export default {
   }
   &--icon-white {
     background-color: transparent;
-    border-color: $c-base;
-    color: $c-base;
-    &:hover {
-      background-color: #e6f7ff;
-    }
-    &:focus {
-      background-color: #00a3f2;
-      border-color: transparent;
-      color: #fff;
-    }
+    border-color: $btn-base;
+    color: $btn-base;
     &:disabled {
       background-color: transparent;
       border-color: #c4c4c4;
@@ -202,15 +192,11 @@ export default {
   &--back {
     background-color: transparent;
     padding: 0;
-    color: $c-base;
+    color: $btn-base;
     box-shadow: none;
     padding-left: 18px;
     font-size: rem(14);
     @include size(74px, 28px);
-    &:hover,
-    &:focus {
-      background-color: transparent;
-    }
     &:active {
       opacity: 0.5;
     }
@@ -233,7 +219,7 @@ export default {
     }
   }
   &--secondary {
-    background-color: $c-base;
+    background-color: $btn-base;
     font-weight: 600;
     color: #ffffff;
 
